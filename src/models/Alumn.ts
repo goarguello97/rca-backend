@@ -30,4 +30,4 @@ const AlumnModel = new Schema<IAlumn>(
   }
 );
 
-export default model("Alumn", AlumnModel);
+export default model<IAlumn>("Alumn", AlumnModel);
