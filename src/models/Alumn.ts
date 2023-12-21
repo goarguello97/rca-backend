@@ -3,7 +3,7 @@ import { IAlumn } from "../interfaces/alumn.interface.js";
 
 const AlumnModel = new Schema<IAlumn>(
   {
-    completedName: {
+    fullName: {
       type: String,
       trim: true,
     },

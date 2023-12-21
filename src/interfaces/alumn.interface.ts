@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 
 export interface IAlumn extends Document {
-  completedName: {
+  fullName: {
     type: string;
     trim: boolean;
   };

@@ -1,10 +1,9 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import CustomError from "../helpers/customError.js";
-import { AuthRequest } from "../interfaces/express.interface.js";
 import Alumn from "../models/Alumn.js";
 
 class AlumnController {
-  getAll = async (req: AuthRequest, res: Response) => {
+  static getAll = async (req: Request, res: Response) => {
     try {
       const { limit = 15, page = 1 } = req.query;
       const [alumnsCount, alumns] = await Promise.all([
@@ -23,7 +22,7 @@ class AlumnController {
     }
   };
 
-  addAlumn = async (req: AuthRequest, res: Response) => {
+  static addAlumn = async (req: Request, res: Response) => {
     try {
       const { body } = req;
       const alumn = new Alumn(body);
@@ -38,7 +37,7 @@ class AlumnController {
     }
   };
 
-  getById = async (req: AuthRequest, res: Response) => {
+  static getById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       const alumn = await Alumn.findById(id);
@@ -53,7 +52,7 @@ class AlumnController {
     }
   };
 
-  searchAlumn = async (req: AuthRequest, res: Response) => {
+  static searchAlumn = async (req: Request, res: Response) => {
     try {
       const { q } = req.query;
       const alumns = await Alumn.find({
@@ -70,7 +69,7 @@ class AlumnController {
     }
   };
 
-  deleteAlumn = async (req: AuthRequest, res: Response) => {
+  static deleteAlumn = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       const alumnDelete = await Alumn.findByIdAndDelete(id);
@@ -85,7 +84,7 @@ class AlumnController {
     }
   };
 
-  updateAlumn = async (req: AuthRequest, res: Response) => {
+  static updateAlumn = async (req: Request, res: Response) => {
     try {
       const { body } = req;
       const { id } = req.params;

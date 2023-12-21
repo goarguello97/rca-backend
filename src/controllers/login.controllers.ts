@@ -2,14 +2,13 @@ import CustomError from "../helpers/customError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import { AuthRequest } from "../interfaces/express.interface.js";
-import { Response } from "express";
+import { Request, Response } from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 class LoginController {
-  login = async (req: AuthRequest, res: Response) => {
+  static login = async (req: Request, res: Response) => {
     try {
       if (process.env.JWT_SECRET_TOKEN) {
         const { email, password } = req.body;

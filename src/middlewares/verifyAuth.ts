@@ -1,14 +1,13 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { NextFunction, Response } from "express";
-import { AuthRequest } from "../interfaces/express.interface.js";
+import { NextFunction, Request, Response } from "express";
 import { IJwtPayload } from "../interfaces/jwt.interface.js";
 
 dotenv.config();
 
 const JWT_SECRET_TOKEN = process.env.JWT_SECRET_TOKEN;
 
-const veryfyAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
+const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
   try {
     if (JWT_SECRET_TOKEN) {
       const token = req.header("authorization");
@@ -29,4 +28,4 @@ const veryfyAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
   }
 };
 
-export default veryfyAuth;
+export default verifyAuth;

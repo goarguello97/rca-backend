@@ -1,11 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { AuthRequest } from "../interfaces/express.interface.js";
 
-const verifyUserIsLogin = (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
+const verifyUserIsLogin = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const idUser = req.id;
