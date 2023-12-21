@@ -1,9 +1,8 @@
-import { NextFunction, Response } from "express";
-import { AuthRequest } from "../interfaces/express.interface.js";
+import { NextFunction, Request, Response } from "express";
 import User from "../models/User.js";
 
 const verifyAdmin = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {

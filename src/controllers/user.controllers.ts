@@ -1,11 +1,10 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import CustomError from "../helpers/customError.js";
-import { AuthRequest } from "../interfaces/express.interface.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
 class UserController {
-  getAll = async (req: AuthRequest, res: Response) => {
+  static getAll = async (req: Request, res: Response) => {
     try {
       const { limit = 15, page = 1 } = req.query;
       const [userCount, users] = await Promise.all([
@@ -24,7 +23,7 @@ class UserController {
     }
   };
 
-  getUsersIsAcepted = async (req: AuthRequest, res: Response) => {
+  static getUsersIsAcepted = async (req: Request, res: Response) => {
     try {
       const { limit = 15, page = 1 } = req.query;
       const [userCount, users] = await Promise.all([
@@ -46,7 +45,7 @@ class UserController {
     }
   };
 
-  register = async (req: AuthRequest, res: Response) => {
+  static register = async (req: Request, res: Response) => {
     try {
       const { password, ...user } = req.body;
       const salt = bcrypt.genSaltSync(10);
@@ -67,7 +66,7 @@ class UserController {
     }
   };
 
-  getById = async (req: AuthRequest, res: Response) => {
+  static getById = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
       const userById = await User.findById(id);
@@ -82,7 +81,7 @@ class UserController {
     }
   };
 
-  deleteUser = async (req: AuthRequest, res: Response) => {
+  static deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
       const userDeleted = await User.findByIdAndDelete(id);
@@ -97,7 +96,7 @@ class UserController {
     }
   };
 
-  updateByIdUser = async (req: AuthRequest, res: Response) => {
+  static updateById = async (req: Request, res: Response) => {
     try {
       if (req.body.password) {
         req.body.password = bcrypt.hashSync(
@@ -121,9 +120,9 @@ class UserController {
     }
   };
 
-  auth = async (req: AuthRequest, res: Response) => {
+  static auth = async (req: Request, res: Response) => {
     try {
-      const { id } = req;
+      const id = req.id;
       const user = await User.findById(id);
       if (!user) throw new CustomError("User not found.", 404);
       return res.status(200).json(user);

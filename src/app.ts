@@ -4,6 +4,7 @@ dotenv.config();
 import cors from "cors";
 import morgan from "morgan";
 import connectionDB from "./db/db.js";
+import router from "./routes/index.routes.js";
 
 const app = express();
 
@@ -17,6 +18,8 @@ const PORT = process.env.PORT || 3000;
 app.get("/", async (req: Request, res: Response) => {
   res.send("Hello World");
 });
+
+app.use("/api", router);
 
 app.listen(PORT, async () => {
   await connectionDB();
