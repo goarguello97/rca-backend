@@ -56,7 +56,7 @@ export const UserRegister: Schema = {
   role: {
     isIn: {
       errorMessage: "Indicate your role.",
-      options: ["USER", "ADMIN"],
+      options: [["USER", "ADMIN"]],
     },
     optional: {
       options: { values: "falsy" },
@@ -113,7 +113,7 @@ export const UserUpdate: Schema = {
   role: {
     isIn: {
       errorMessage: "Indicate your role.",
-      options: ["USER", "ADMIN"],
+      options: [["USER", "ADMIN"]] ,
     },
     optional: {
       options: { values: "falsy" },

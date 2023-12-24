@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "ts-node src/app.ts",
-    "dev": "tsc && nodemon dist/app.js",
+    "dev": "nodemon dist/app.js",
     "build": "tsc",
-    "serve": "node dist/app.js"
+    "serve": "node dist/app.js",
+    "server": "tsc --watch"
   },
   "keywords": [],
   "author": "",

@@ -13,15 +13,15 @@ class LoginController {
       if (process.env.JWT_SECRET_TOKEN) {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        if (!user) throw new CustomError("Usuario no encontrado", 404);
+        if (!user) throw new CustomError("User not found.", 404);
         const isOk = bcrypt.compareSync(password, user.password as string);
-        if (!isOk) throw new CustomError("credenciales invalidas", 401);
+        if (!isOk) throw new CustomError("Invalid credentials.", 401);
         const token = jwt.sign(
           { email, id: user._id },
           process.env.JWT_SECRET_TOKEN,
           { expiresIn: "3h" }
         );
-        return res.status(200).json({ message: "logeo correcto", token, user });
+        return res.status(200).json({ message: "Success login.", token, user });
       } else {
         throw new Error("JWT_SECRET is null.");
       }
